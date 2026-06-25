@@ -1,0 +1,9 @@
+apiVersion: cost.cost-optimizer.io/v1alpha1
+kind: Utilization
+metadata:
+  labels:
+    app.kubernetes.io/name: k8s-cost-optimizer
+    app.kubernetes.io/managed-by: kustomize
+  name: utilization-sample
+spec:
+  # TODO(user): Add fields here

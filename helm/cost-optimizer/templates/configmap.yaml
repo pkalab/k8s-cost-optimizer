@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cost-optimizer.fullname" . }}-config
+data:
+  cost-optimizer-config.yaml: |
+    lookbackPeriod: {{ .Values.config.lookbackPeriod }}
+    prometheusAddress: {{ .Values.config.prometheusAddress }}
+    awsRegion: {{ .Values.config.awsRegion }}
+    spotCandidateThreshold: {{ .Values.config.spotCandidateThreshold }}
+    riTermYears: {{ .Values.config.riTermYears }}

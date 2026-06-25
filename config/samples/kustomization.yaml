@@ -1,0 +1,6 @@
+## Append samples of your project ##
+resources:
+- cost_v1alpha1_utilization.yaml
+- cost_v1alpha1_recommendation.yaml
+- cost_v1alpha1_costoptimizerconfig.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

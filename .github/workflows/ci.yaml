@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b9e0990d219a03df7633c93f6f005a8fecbcab22
+      - uses: actions/setup-go@6a61c0375d66246de94630495909f12cf8dac84d
+        with:
+          go-version: "1.24"
+          cache: true
+      - run: go test ./... -v
+      - run: go build ./...
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b9e0990d219a03df7633c93f6f005a8fecbcab22
+      - uses: actions/setup-go@6a61c0375d66246de94630495909f12cf8dac84d
+        with:
+          go-version: "1.24"
+          cache: true
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest

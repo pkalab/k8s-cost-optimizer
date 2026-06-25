@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/pkalab/k8s-cost-optimizer
+  tag: latest
+  pullPolicy: IfNotPresent
+
+config:
+  lookbackPeriod: 7d
+  prometheusAddress: http://prometheus.monitoring:9090
+  awsRegion: us-east-1
+  spotCandidateThreshold: 0.6
+  riTermYears: 1
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

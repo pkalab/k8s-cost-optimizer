@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cost-optimizer.fullname" . }}
+  labels:
+    app: {{ include "cost-optimizer.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "cost-optimizer.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "cost-optimizer.name" . }}
+    spec:
+      serviceAccountName: {{ include "cost-optimizer.fullname" . }}
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - name: manager
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --leader-elect
+          env:
+            - name: AWS_REGION
+              value: {{ .Values.config.awsRegion }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - "ALL"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
